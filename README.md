@@ -5,8 +5,17 @@
 ## Docker
 из корневой директории  
 ```docker-compose up --build ```
+откройте новый терминал и запустить 
+```docker ps ```
+Захватить идентификатор контейнера file_web
+после этого запускаем команду
 
+```docker exec -it file_web_id /bin/sh ```
+после этого запускаем команду
+```celery -A base worker --loglevel=info ```
 
+Также можно запускать тесты
+```pytest ```
 ## Backend
 
 ```cd FileProcessor ```
@@ -26,7 +35,7 @@
 ## Frontend
 
 
-```cd frontend ```
+```cd front ```
 
 ```npm i ```
 
