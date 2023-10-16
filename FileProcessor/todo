@@ -1,0 +1,7 @@
+1. see how to explicitly specify file extensions supported by
+the application
+
+2. set up a client app out of the box
+3. dockerize the application
+4. go through the deployment part
+5. send 

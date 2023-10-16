@@ -1,0 +1,21 @@
+body { 
+  padding-top: 50px;
+}
+
+    /* Add CSS styles to format the file list */
+    #fileList {
+      list-style: none;
+      padding: 0;
+    }
+
+    #fileList li {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 5px 0;
+      background-color: #f5f5f5;
+      white-space: pre-wrap; /* Preserve line breaks and whitespace */
+    }
+
+    #showFiles {
+      margin-top: 10px;
+    }

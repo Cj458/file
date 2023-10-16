@@ -1,0 +1,53 @@
+version: '3'
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+    restart: on-failure
+    volumes:
+      - .:/app
+
+  redis:
+    image: "redis:latest"
+    ports:
+      - 6379:6379
+    restart: always
+    volumes:
+      - redisdata:/data
+
+
+  celery:
+    build: .
+    command: celery -A base worker --loglevel=info
+    depends_on:
+      - redis
+    volumes:
+      - .:/app
+  flower:
+    build: .
+    command: celery -A base flower
+    depends_on:
+      - web
+      - redis
+      - celery
+    environment:
+      - DEBUG=1
+      - CELERY_BROKER=redis://redis:6379/0
+      - CELERY_BACKEND=redis://redis:6379/0
+    ports:
+      - 5555:5555
+  tests:
+    build: .
+    command:  pytest
+    depends_on:
+      - redis
+    tty: true
+    volumes:
+      - .:/app
+
+volumes:
+  redisdata:    
